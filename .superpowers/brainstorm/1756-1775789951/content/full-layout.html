@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Wireframe — Hafizh Fauzan</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #1a1a2e; }
+
+  .page { max-width: 900px; margin: 24px auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 32px rgba(0,0,0,0.12); }
+
+  .label-tag {
+    display: inline-block;
+    background: #1a1a2e;
+    color: #a0aec0;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+
+  /* NAV */
+  .nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 48px;
+    border-bottom: 1px solid #eee;
+    background: white;
+  }
+  .nav-logo { font-weight: 700; font-size: 16px; color: #1a1a2e; letter-spacing: -0.5px; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links span { font-size: 13px; color: #555; cursor: pointer; }
+  .nav-cta { background: #1a1a2e; color: white; padding: 8px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; }
+
+  /* HERO */
+  .hero {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 64px 48px;
+    background: linear-gradient(135deg, #f8f9ff 0%, #eef0f8 100%);
+    gap: 40px;
+  }
+  .hero-left { flex: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #e8edf8; border: 1px solid #c5d0e8;
+    color: #1a1a2e; font-size: 12px; font-weight: 600;
+    padding: 5px 12px; border-radius: 20px; margin-bottom: 20px;
+  }
+  .hero-badge::before { content: ''; display: inline-block; width: 8px; height: 8px; background: #22c55e; border-radius: 50%; }
+  .hero-name { font-size: 42px; font-weight: 800; line-height: 1.1; color: #1a1a2e; margin-bottom: 8px; letter-spacing: -1px; }
+  .hero-title { font-size: 18px; color: #4a5568; font-weight: 500; margin-bottom: 16px; }
+  .hero-desc { font-size: 14px; color: #718096; line-height: 1.7; max-width: 440px; margin-bottom: 28px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: #1a1a2e; color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; }
+  .btn-secondary { background: transparent; color: #1a1a2e; border: 2px solid #1a1a2e; padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; }
+
+  .hero-right {
+    flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .photo-circle {
+    width: 200px; height: 200px; border-radius: 50%;
+    border: 4px solid #1a1a2e;
+    background: #c5d0e8;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #555; font-weight: 600;
+    overflow: hidden;
+  }
+  .photo-circle img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .chip { background: #f0f2fa; border: 1px solid #dde2f0; padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #1a1a2e; font-weight: 600; }
+
+  /* NUMBERS */
+  .numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #eee; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+  .number-item { background: white; padding: 28px 20px; text-align: center; }
+  .number-val { font-size: 32px; font-weight: 800; color: #1a1a2e; line-height: 1; }
+  .number-label { font-size: 12px; color: #718096; margin-top: 6px; line-height: 1.4; }
+
+  /* ABOUT */
+  .about { padding: 56px 48px; display: flex; gap: 48px; align-items: flex-start; }
+  .about-left { flex: 1; }
+  .about-left h2 { font-size: 26px; font-weight: 800; color: #1a1a2e; margin-bottom: 16px; }
+  .about-left p { font-size: 14px; color: #4a5568; line-height: 1.8; margin-bottom: 12px; }
+  .about-right { width: 200px; flex-shrink: 0; }
+  .sector-tags { display: flex; flex-direction: column; gap: 8px; }
+  .sector-tag { background: #f8f9ff; border-left: 3px solid #1a1a2e; padding: 8px 12px; font-size: 12px; color: #1a1a2e; font-weight: 600; }
+
+  /* EXPERIENCE */
+  .experience { padding: 56px 48px; background: #f8f9ff; }
+  .experience h2 { font-size: 26px; font-weight: 800; color: #1a1a2e; margin-bottom: 32px; }
+  .timeline { display: flex; flex-direction: column; gap: 24px; }
+  .timeline-item { display: flex; gap: 20px; }
+  .timeline-dot-col { display: flex; flex-direction: column; align-items: center; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; background: #1a1a2e; flex-shrink: 0; margin-top: 4px; }
+  .dot-current { background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.2); }
+  .timeline-line { flex: 1; width: 2px; background: #dde2f0; margin: 4px 0; }
+  .timeline-content { flex: 1; padding-bottom: 8px; }
+  .timeline-company { font-size: 15px; font-weight: 700; color: #1a1a2e; }
+  .timeline-role { font-size: 13px; color: #4a5568; font-style: italic; }
+  .timeline-date { font-size: 11px; color: #718096; margin: 2px 0 8px; }
+  .timeline-highlights { font-size: 13px; color: #4a5568; line-height: 1.6; }
+
+  /* SKILLS */
+  .skills { padding: 56px 48px; }
+  .skills h2 { font-size: 26px; font-weight: 800; color: #1a1a2e; margin-bottom: 32px; }
+  .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .skill-group h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #718096; margin-bottom: 10px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag { background: #1a1a2e; color: white; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+  .skill-tag.light { background: #f0f2fa; color: #1a1a2e; border: 1px solid #dde2f0; }
+
+  /* CONTACT */
+  .contact { padding: 56px 48px; background: #1a1a2e; color: white; text-align: center; }
+  .contact h2 { font-size: 26px; font-weight: 800; margin-bottom: 12px; }
+  .contact p { font-size: 14px; color: #a0aec0; margin-bottom: 32px; }
+  .contact-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  .contact-link { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 12px 20px; border-radius: 8px; font-size: 13px; color: white; }
+
+  /* annotation */
+  .annotation {
+    position: relative;
+  }
+  .ann-badge {
+    display: inline-block;
+    background: #ffd200;
+    color: #1a1a1a;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+<div style="background:#1a1a2e;color:#a0aec0;font-size:12px;text-align:center;padding:8px;letter-spacing:1px;font-weight:600;">
+  WIREFRAME PREVIEW — Hafizh Fauzan Portfolio Landing Page
+</div>
+<div class="page">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo">HF</div>
+    <div class="nav-links">
+      <span>About</span>
+      <span>Experience</span>
+      <span>Skills</span>
+    </div>
+    <div class="nav-cta">Get in Touch</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">Open to opportunities</div>
+      <div class="hero-name">Hafizh Fauzan</div>
+      <div class="hero-title">Credit Risk Data Scientist</div>
+      <div class="hero-desc">4+ years building regulatory-grade scorecards and ML models on national-scale credit data. Specialized in risk strategy, feature engineering, and translating complex data insights for financial institutions.</div>
+      <div class="hero-btns">
+        <div class="btn-primary">Download Resume</div>
+        <div class="btn-secondary">View Experience</div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="photo-circle">
+        <img src="/E:/Code/Hafizh Landing Page/Pas Photo Formal.jpg" alt="Hafizh Fauzan" onerror="this.parentElement.innerHTML='Profile Photo'">
+      </div>
+      <div class="hero-chips">
+        <div class="chip">Python</div>
+        <div class="chip">PySpark</div>
+        <div class="chip">SQL</div>
+        <div class="chip">ML</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY NUMBERS -->
+  <div class="numbers">
+    <div class="number-item">
+      <div class="number-val">4+</div>
+      <div class="number-label">Years Experience</div>
+    </div>
+    <div class="number-item">
+      <div class="number-val">100M+</div>
+      <div class="number-label">Credit Subjects Analyzed</div>
+    </div>
+    <div class="number-item">
+      <div class="number-val">30+</div>
+      <div class="number-label">Financial Institutions</div>
+    </div>
+    <div class="number-item">
+      <div class="number-val">20–30%</div>
+      <div class="number-label">Approval Rate Lift</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-left">
+      <div class="label-tag">About</div>
+      <h2>Turning Credit Data into Business Value</h2>
+      <p>I specialize in building Scorecard and ML models that financial institutions use to make smarter lending decisions. From feature engineering on 15,000+ attributes to presenting PoC findings to C-suite executives, I bridge the gap between data science and business impact.</p>
+      <p>Currently at CRIF — Indonesia's national credit bureau — working with the full Indonesian credit data combined with Telco data to deliver models at national scale.</p>
+    </div>
+    <div class="about-right">
+      <div class="label-tag">Sectors</div>
+      <div class="sector-tags">
+        <div class="sector-tag">Credit Bureau</div>
+        <div class="sector-tag">Multi-Finance</div>
+        <div class="sector-tag">Banking</div>
+        <div class="sector-tag">Insurance / BNPL</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience">
+    <div class="label-tag">Experience</div>
+    <h2>Career Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot-col">
+          <div class="dot dot-current"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-company">CRIF Lembaga Informasi Keuangan</div>
+          <div class="timeline-role">Senior Analytics Consultant</div>
+          <div class="timeline-date">Jan 2024 — Present</div>
+          <div class="timeline-highlights">Behavioral scorecard models on 100M+ subjects · 15,000+ feature store · Led full model lifecycle PoCs for 30+ institutions · 20–30% approval rate lift</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot-col">
+          <div class="dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-company">Astra Financial</div>
+          <div class="timeline-role">Data Scientist</div>
+          <div class="timeline-date">Nov 2022 — Jan 2024</div>
+          <div class="timeline-highlights">78% increase in valid leads · 35% GMV rise · Led Analytics Forum across Astra subsidiaries</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot-col">
+          <div class="dot"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-company">Bank Sinarmas</div>
+          <div class="timeline-role">Data Scientist</div>
+          <div class="timeline-date">Jun 2021 — Nov 2022</div>
+          <div class="timeline-highlights">Customer segmentation with PySpark · Explainable AI solutions · Presented to senior leadership</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills">
+    <div class="label-tag">Skills</div>
+    <h2>Technical Toolkit</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Programming</h4>
+        <div class="skill-tags">
+          <div class="skill-tag">Python</div>
+          <div class="skill-tag">SQL</div>
+          <div class="skill-tag">PySpark</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>ML & Analytics</h4>
+        <div class="skill-tags">
+          <div class="skill-tag">Predictive Modeling</div>
+          <div class="skill-tag">Feature Engineering</div>
+          <div class="skill-tag">Risk Analysis</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Big Data</h4>
+        <div class="skill-tags">
+          <div class="skill-tag light">Hadoop</div>
+          <div class="skill-tag light">Apache Spark</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Visualization & Tools</h4>
+        <div class="skill-tags">
+          <div class="skill-tag light">Tableau</div>
+          <div class="skill-tag light">Power BI</div>
+          <div class="skill-tag light">Git</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <div class="label-tag" style="background:rgba(255,255,255,0.1);color:#a0aec0;">Contact</div>
+    <h2>Let's Work Together</h2>
+    <p>Available for consulting engagements, full-time roles, and advisory work in credit risk & data science.</p>
+    <div class="contact-links">
+      <div class="contact-link">📧 hayeef8@gmail.com</div>
+      <div class="contact-link">📞 +62 812 2154 6465</div>
+      <div class="contact-link">🔗 LinkedIn</div>
+    </div>
+  </section>
+
+</div>
+
+<div style="text-align:center;padding:16px;font-size:12px;color:#888;">
+  This is a wireframe — final version will use real photo, refined typography, smooth animations, and polished styles.
+</div>
+</body>
+</html>
