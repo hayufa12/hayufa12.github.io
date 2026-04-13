@@ -13,6 +13,7 @@ export default {
         text2:     '#4a5568',
         text3:     '#718096',
         green:     '#22c55e',
+        'navy-dark': '#13132a',
       },
       fontFamily: {
         sans: ['Inter', 'Segoe UI', 'system-ui', 'sans-serif'],
