@@ -1,9 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 export function useCounter(elRef, target, duration = 1000) {
   useEffect(() => {
     const el = elRef.current
     if (!el) return
+
+    let rafId
 
     const observer = new IntersectionObserver(
       entries => {
@@ -15,15 +17,18 @@ export function useCounter(elRef, target, duration = 1000) {
           const p = Math.min((now - start) / duration, 1)
           const ease = 1 - Math.pow(1 - p, 3)
           el.textContent = Math.floor(ease * target)
-          if (p < 1) requestAnimationFrame(tick)
+          if (p < 1) rafId = requestAnimationFrame(tick)
           else el.textContent = target
         }
-        requestAnimationFrame(tick)
+        rafId = requestAnimationFrame(tick)
       },
       { threshold: 0.5 }
     )
 
     observer.observe(el)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(rafId)
+    }
   }, [elRef, target, duration])
 }
