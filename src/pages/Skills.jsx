@@ -49,7 +49,7 @@ export default function Skills() {
           {groups.map((g, i) => (
             <div
               key={g.title}
-              className={`reveal reveal-d${i} bg-bg-2 border border-border p-6 rounded-xl transition-all duration-200 hover:shadow-[0_4px_16px_rgba(26,26,46,0.08)] hover:border-border-2`}
+              className={`reveal reveal-d${i + 1} bg-bg-2 border border-border p-6 rounded-xl transition-all duration-200 hover:shadow-[0_4px_16px_rgba(26,26,46,0.08)] hover:border-border-2`}
             >
               <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-text3 mb-[14px]">{g.title}</div>
               <div className="flex flex-wrap gap-2">

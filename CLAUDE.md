@@ -7,7 +7,7 @@ Portfolio landing page for Hafizh Fauzan, a Credit Risk Data Scientist. Currentl
 ## Stack
 
 - **Current:** Plain HTML/CSS + vanilla JS (`index.html`)
-- **Target:** Vite 5 + React 18 + React Router v6 + Tailwind CSS v3
+- **Target:** Vite 8 + React 19 + React Router v7 + Tailwind CSS v3
 
 ## Worktrees
 
