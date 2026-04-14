@@ -12,7 +12,7 @@ export default function Contact() {
   useReveal(ref)
 
   return (
-    <section ref={ref} aria-label="Contact" className="px-12 py-24 bg-navy text-white text-center">
+    <section id="contact" ref={ref} aria-label="Contact" className="px-12 py-24 bg-navy text-white text-center">
       <div className="max-w-[700px] mx-auto">
         <div className="reveal inline-block bg-white/[0.12] text-white/60 text-[10px] font-bold tracking-[0.15em] uppercase px-[10px] py-1 rounded mb-4">Contact</div>
         <h1 className="reveal reveal-d1 text-[clamp(24px,3vw,32px)] font-extrabold text-white tracking-tight leading-snug mb-[14px]">Let's Work Together</h1>

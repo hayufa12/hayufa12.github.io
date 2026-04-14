@@ -1,6 +1,6 @@
 export default function Projects() {
   return (
-    <section aria-label="Projects" className="px-12 py-24 bg-bg-2 min-h-[60vh] flex items-center justify-center">
+    <section id="projects" aria-label="Projects" className="px-12 py-24 bg-bg-2 min-h-[60vh] flex items-center justify-center">
       <div className="max-w-[500px] text-center bg-white border border-border rounded-2xl p-12 shadow-sm">
         <div className="inline-block bg-navy text-white/70 text-[10px] font-bold tracking-[0.15em] uppercase px-[10px] py-1 rounded mb-5">Projects</div>
         <h1 className="text-[clamp(24px,3vw,32px)] font-extrabold text-navy tracking-tight leading-snug mb-4">Coming Soon</h1>

@@ -6,7 +6,7 @@ export default function About() {
   useReveal(ref)
 
   return (
-    <section ref={ref} aria-label="About" className="px-12 py-24 bg-white">
+    <section id="about" ref={ref} aria-label="About" className="px-12 py-24 bg-white">
       <div className="max-w-[1100px] mx-auto grid grid-cols-[1fr_260px] gap-20 items-start max-[860px]:grid-cols-1 max-[860px]:gap-9">
         <div>
           <div className="reveal inline-block bg-navy text-white/70 text-[10px] font-bold tracking-[0.15em] uppercase px-[10px] py-1 rounded mb-[14px]">About</div>

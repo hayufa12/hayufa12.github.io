@@ -41,7 +41,7 @@ export default function Skills() {
   useReveal(ref)
 
   return (
-    <section ref={ref} aria-label="Skills" className="px-12 py-24 bg-white">
+    <section id="skills" ref={ref} aria-label="Skills" className="px-12 py-24 bg-white">
       <div className="max-w-[1100px] mx-auto">
         <div className="reveal inline-block bg-navy text-white/70 text-[10px] font-bold tracking-[0.15em] uppercase px-[10px] py-1 rounded mb-[14px]">Skills</div>
         <h1 className="reveal reveal-d1 text-[clamp(24px,3vw,32px)] font-extrabold text-navy tracking-tight leading-snug mb-10">Technical Toolkit</h1>
