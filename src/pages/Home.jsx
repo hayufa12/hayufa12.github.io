@@ -1,5 +1,4 @@
 import { useRef } from 'react'
-import { Link } from 'react-router-dom'
 import { useReveal } from '../hooks/useReveal'
 import { useCounter } from '../hooks/useCounter'
 import photo from '../assets/photo.jpg'
@@ -28,9 +27,9 @@ function CounterStat({ target, suffix, label, delay = '' }) {
 
 export default function Home() {
   const heroRef = useRef(null)
-  const bodyRef = useRef(null)
+  const numbersRef = useRef(null)
   useReveal(heroRef, true)
-  useReveal(bodyRef)
+  useReveal(numbersRef)
 
   return (
     <>
@@ -66,12 +65,12 @@ export default function Home() {
               >
                 Download Resume
               </a>
-              <Link
-                to="/experience"
+              <button
+                onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
                 className="inline-flex items-center gap-2 bg-transparent text-navy border-2 border-navy text-[13px] font-semibold px-[22px] py-[10px] rounded-lg transition-all duration-200 hover:bg-navy/5 hover:-translate-y-px"
               >
                 View Experience
-              </Link>
+              </button>
             </div>
           </div>
 
@@ -95,44 +94,13 @@ export default function Home() {
         </div>
       </section>
 
-      <div ref={bodyRef}>
-        {/* KEY NUMBERS */}
+      <div ref={numbersRef}>
         <section aria-label="Key statistics" className="border-t border-b border-border bg-white">
           <div className="max-w-[1100px] mx-auto grid grid-cols-4 max-[860px]:grid-cols-2">
             <CounterStat target={4}   suffix="+" label="Years Experience" />
             <CounterStat target={100} suffix="M+" label="Credit Subjects Analyzed" delay="reveal-d1" />
             <CounterStat target={30}  suffix="+" label="Financial Institutions" delay="reveal-d2" />
             <StatItem value="20–30%" label="Approval Rate Lift" delay="reveal-d3" />
-          </div>
-        </section>
-
-        {/* ABOUT PREVIEW */}
-        <section aria-label="About" className="px-12 py-24 bg-white">
-          <div className="max-w-[1100px] mx-auto grid grid-cols-[1fr_260px] gap-20 items-start max-[860px]:grid-cols-1 max-[860px]:gap-9">
-            <div>
-              <div className="reveal inline-block bg-navy text-white/70 text-[10px] font-bold tracking-[0.15em] uppercase px-[10px] py-1 rounded mb-[14px]">About</div>
-              <h2 className="reveal reveal-d1 text-[clamp(24px,3vw,32px)] font-extrabold text-navy tracking-tight leading-snug mb-[22px]">Professional Summary</h2>
-              <p className="reveal reveal-d2 text-[14.5px] text-text2 leading-[1.85]">
-                Credit Risk Data Scientist with <strong className="text-navy font-semibold">4+ years of experience</strong> across Banking, Multi-Finance,
-                and Credit Bureau sectors. Specialized in building <strong className="text-navy font-semibold">regulatory-grade Scorecards and ML models</strong> on massive datasets.
-                Proven track record of leveraging national-scale credit data to drive <strong className="text-navy font-semibold">risk strategy and revenue growth</strong>.
-              </p>
-              <div className="reveal reveal-d3 mt-6">
-                <Link to="/about" className="text-[13px] font-semibold text-navy border-b-2 border-navy pb-px hover:opacity-70 transition-opacity">
-                  Read More →
-                </Link>
-              </div>
-            </div>
-            <div>
-              <div className="reveal inline-block bg-navy text-white/70 text-[10px] font-bold tracking-[0.15em] uppercase px-[10px] py-1 rounded mb-[14px]">Sectors</div>
-              <div className="flex flex-col gap-2 mt-[14px]">
-                {['Credit Bureau', 'Multi-Finance', 'Banking', 'BNPL / Personal Loan'].map((s, i) => (
-                  <div key={s} className={`reveal reveal-d${i + 1} bg-bg-2 border-l-[3px] border-navy px-[14px] py-[10px] text-[13px] font-medium text-navy rounded-r-md transition-all duration-200 hover:bg-bg-3 hover:translate-x-[3px]`}>
-                    {s}
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </section>
       </div>
