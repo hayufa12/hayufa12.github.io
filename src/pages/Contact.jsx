@@ -1,15 +1,17 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
-
-const contacts = [
-  { icon: '📧', type: 'Email',    value: 'hayeef8@gmail.com',       href: 'mailto:hayeef8@gmail.com',               delay: '' },
-  { icon: '📞', type: 'Phone',    value: '+62 812 2154 6465',        href: 'tel:+6281221546465',                     delay: 'reveal-d1' },
-  { icon: '🔗', type: 'LinkedIn', value: 'linkedin.com/in/hafizhf', href: 'https://www.linkedin.com/in/hafizhf/',   delay: 'reveal-d2' },
-]
+import { useProfile } from '../hooks/useProfile'
 
 export default function Contact() {
   const ref = useRef(null)
   useReveal(ref)
+  const { profile } = useProfile()
+
+  const contacts = profile ? [
+    { icon: '📧', type: 'Email',    value: profile.email,   href: `mailto:${profile.email}`,   delay: '' },
+    { icon: '📞', type: 'Phone',    value: profile.phone,   href: `tel:${profile.phone.replace(/\s/g, '')}`, delay: 'reveal-d1' },
+    { icon: '🔗', type: 'LinkedIn', value: profile.linkedin.replace('https://', ''), href: profile.linkedin, delay: 'reveal-d2' },
+  ] : []
 
   return (
     <section id="contact" ref={ref} aria-label="Contact" className="px-12 py-24 bg-navy text-white text-center">
