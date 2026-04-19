@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 
-export function useReveal(containerRef, triggerImmediately = false) {
+export function useReveal(containerRef, triggerImmediately = false, deps = []) {
   useEffect(() => {
     const container = containerRef?.current ?? document
-    const els = container.querySelectorAll('.reveal')
+    const els = container.querySelectorAll('.reveal:not(.visible)')
 
     if (triggerImmediately) {
       els.forEach(el => el.classList.add('visible'))
@@ -24,5 +24,6 @@ export function useReveal(containerRef, triggerImmediately = false) {
 
     els.forEach(el => observer.observe(el))
     return () => observer.disconnect()
-  }, [containerRef, triggerImmediately])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [containerRef, triggerImmediately, ...deps])
 }

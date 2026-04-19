@@ -4,8 +4,8 @@ import { useExperience } from '../hooks/useExperience'
 
 export default function Experience() {
   const ref = useRef(null)
-  useReveal(ref)
   const { jobs } = useExperience()
+  useReveal(ref, false, [jobs])
 
   return (
     <section id="experience" ref={ref} aria-label="Experience" className="px-12 py-24 bg-bg-2 border-t border-b border-border">

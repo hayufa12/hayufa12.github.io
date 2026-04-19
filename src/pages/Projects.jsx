@@ -79,8 +79,8 @@ function ProjectCard({ project, userRequest, onRequestAccess }) {
 
 export default function Projects() {
   const ref = useRef(null)
-  useReveal(ref)
   const { projects, loading } = useProjects()
+  useReveal(ref, false, [projects])
   const { user } = useAuth()
   const [requests, setRequests] = useState({})
 

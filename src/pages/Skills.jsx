@@ -4,8 +4,8 @@ import { useSkills } from '../hooks/useSkills'
 
 export default function Skills() {
   const ref = useRef(null)
-  useReveal(ref)
   const { groups } = useSkills()
+  useReveal(ref, false, [groups])
 
   return (
     <section id="skills" ref={ref} aria-label="Skills" className="px-12 py-24 bg-white">

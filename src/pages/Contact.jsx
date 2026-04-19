@@ -4,8 +4,8 @@ import { useProfile } from '../hooks/useProfile'
 
 export default function Contact() {
   const ref = useRef(null)
-  useReveal(ref)
   const { profile } = useProfile()
+  useReveal(ref, false, [profile])
 
   const contacts = profile ? [
     { icon: '📧', type: 'Email',    value: profile.email,   href: `mailto:${profile.email}`,   delay: '' },
