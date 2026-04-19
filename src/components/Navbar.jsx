@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useActiveSection } from '../hooks/useActiveSection'
+import { useAuth } from '../context/AuthContext'
+import { supabase } from '../lib/supabase'
 
 const links = [
   { id: 'about',      label: 'About' },
@@ -18,12 +20,17 @@ function scrollTo(id) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const activeId = useActiveSection(SECTION_IDS)
+  const { user, isAdmin } = useAuth()
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
+
+  async function handleSignOut() {
+    await supabase.auth.signOut()
+  }
 
   return (
     <nav
@@ -49,12 +56,43 @@ export default function Navbar() {
         ))}
       </div>
 
-      <button
-        onClick={() => scrollTo('contact')}
-        className="bg-navy text-white text-[13px] font-semibold px-5 py-[9px] rounded-lg transition-all duration-200 hover:bg-navy-2 hover:-translate-y-px"
-      >
-        Get in Touch
-      </button>
+      <div className="flex items-center gap-3">
+        {user ? (
+          <>
+            <span className="hidden md:block text-[12px] text-text3 max-w-[160px] truncate">
+              {isAdmin && <span className="text-[10px] font-bold uppercase tracking-wide text-navy bg-navy/10 px-[6px] py-[2px] rounded mr-1">Admin</span>}
+              {user.email}
+            </span>
+            {isAdmin && (
+              <a
+                href="/admin"
+                className="text-[12px] font-semibold text-navy hover:underline"
+              >
+                Dashboard
+              </a>
+            )}
+            <button
+              onClick={handleSignOut}
+              className="text-[12px] font-semibold text-text3 hover:text-navy transition-colors"
+            >
+              Sign out
+            </button>
+          </>
+        ) : (
+          <a
+            href="/login"
+            className="text-[13px] font-medium text-text3 hover:text-navy transition-colors"
+          >
+            Sign in
+          </a>
+        )}
+        <button
+          onClick={() => scrollTo('contact')}
+          className="bg-navy text-white text-[13px] font-semibold px-5 py-[9px] rounded-lg transition-all duration-200 hover:bg-navy-2 hover:-translate-y-px"
+        >
+          Get in Touch
+        </button>
+      </div>
     </nav>
   )
 }
