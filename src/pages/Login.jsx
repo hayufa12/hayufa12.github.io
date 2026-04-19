@@ -11,8 +11,27 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [registered, setRegistered] = useState(false)
 
   if (user) return <Navigate to="/" replace />
+
+  if (registered) return (
+    <div className="min-h-screen bg-bg-2 flex items-center justify-center px-6">
+      <div className="w-full max-w-[400px] bg-white border border-border rounded-2xl p-10 shadow-sm text-center">
+        <div className="text-3xl mb-4">📧</div>
+        <h1 className="text-[20px] font-extrabold text-navy mb-2">Check your email</h1>
+        <p className="text-[13px] text-text3 mb-6">
+          We sent a confirmation link to <strong>{email}</strong>. Click it to activate your account, then come back to sign in.
+        </p>
+        <button
+          onClick={() => { setRegistered(false); setMode('login') }}
+          className="text-[13px] font-semibold text-navy hover:underline"
+        >
+          Back to sign in
+        </button>
+      </div>
+    </div>
+  )
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -23,8 +42,10 @@ export default function Login() {
       const { error } = await supabase.auth.signInWithPassword({ email, password })
       if (error) { setError(error.message); setLoading(false); return }
     } else {
-      const { error } = await supabase.auth.signUp({ email, password })
+      const { data, error } = await supabase.auth.signUp({ email, password })
       if (error) { setError(error.message); setLoading(false); return }
+      // If no session, email confirmation is required
+      if (!data.session) { setRegistered(true); setLoading(false); return }
     }
 
     navigate('/', { replace: true })
