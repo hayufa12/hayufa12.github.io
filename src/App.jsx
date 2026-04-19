@@ -8,9 +8,11 @@ import Skills from './pages/Skills'
 import Projects from './pages/Projects'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
+import ProjectTool from './pages/ProjectTool'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminLayout from './pages/admin/AdminLayout'
 import ProtectedAdminRoute from './components/ProtectedAdminRoute'
+import ProtectedProjectRoute from './components/ProtectedProjectRoute'
 
 function Portfolio() {
   return (
@@ -35,6 +37,14 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Portfolio />} />
         <Route path="/login" element={<Login />} />
+        <Route
+          path="/projects/:id"
+          element={
+            <ProtectedProjectRoute>
+              <ProjectTool />
+            </ProtectedProjectRoute>
+          }
+        />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route
           path="/admin/*"

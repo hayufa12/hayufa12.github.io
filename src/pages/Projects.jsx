@@ -20,7 +20,7 @@ function ProjectCard({ project, userRequest, onRequestAccess }) {
 
   function handleAction() {
     if (!project.is_gated) {
-      navigate(`/projects/${project.id}`)
+      if (project.project_url) window.open(project.project_url, '_blank', 'noopener,noreferrer')
       return
     }
     if (!user) {
@@ -37,7 +37,7 @@ function ProjectCard({ project, userRequest, onRequestAccess }) {
   }
 
   function getActionLabel() {
-    if (!project.is_gated) return 'Open Project'
+    if (!project.is_gated) return project.project_url ? 'Open Project' : 'Coming Soon'
     if (!user) return 'Request Access'
     if (userRequest?.status === 'approved') return 'Open Project'
     if (userRequest?.status === 'pending') return 'Pending Approval'

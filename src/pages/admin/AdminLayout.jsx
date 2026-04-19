@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate, Routes, Route, Navigate } from 'react-router-dom'
+import { NavLink, useNavigate, Routes, Route, Navigate } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
 import ProfileAdmin from './ProfileAdmin'
 import ExperienceAdmin from './ExperienceAdmin'

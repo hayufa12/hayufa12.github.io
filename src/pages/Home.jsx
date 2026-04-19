@@ -32,11 +32,10 @@ const delays = ['', 'reveal-d1', 'reveal-d2', 'reveal-d3']
 export default function Home() {
   const heroRef = useRef(null)
   const numbersRef = useRef(null)
-  useReveal(heroRef, true)
-  useReveal(numbersRef)
-
   const { profile } = useProfile()
   const { stats } = useStats()
+  useReveal(heroRef, true)
+  useReveal(numbersRef, false, [stats])
 
   return (
     <>
