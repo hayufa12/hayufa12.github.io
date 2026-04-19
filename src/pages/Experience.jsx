@@ -17,14 +17,14 @@ export default function Experience() {
           {jobs.map((job, idx) => (
             <div key={job.id} className={`reveal flex gap-8 ${idx < jobs.length - 1 ? 'pb-12' : ''}`}>
               <div className="flex flex-col items-center pt-1">
-                <div className={`w-3 h-3 rounded-full flex-shrink-0 ${job.is_current ? 'bg-green' : 'bg-navy/30'}`} />
+                <div className={`w-3 h-3 rounded-full flex-shrink-0 ${job.is_current ? 'bg-accent' : 'bg-navy/30'}`} />
                 {idx < jobs.length - 1 && <div className="w-px flex-1 bg-border mt-2" />}
               </div>
               <div className="flex-1 pb-0">
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-[6px]">
                   <span className="text-[15px] font-bold text-navy">{job.company}</span>
                   {job.is_current && (
-                    <span className="text-[10px] font-bold tracking-[0.1em] uppercase text-green bg-green/10 px-2 py-[2px] rounded">Current</span>
+                    <span className="text-[10px] font-bold tracking-[0.1em] uppercase text-accent bg-accent/10 px-2 py-[2px] rounded">Current</span>
                   )}
                 </div>
                 <div className="text-[13px] font-semibold text-text2 mb-[4px]">{job.role}</div>

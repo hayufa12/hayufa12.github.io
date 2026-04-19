@@ -48,7 +48,7 @@ export default function Home() {
         <div className="max-w-[1100px] mx-auto flex items-center justify-between gap-[60px] flex-wrap">
           <div className="flex-1 min-w-[280px]">
             <div className="reveal inline-flex items-center gap-2 bg-white border border-border text-text2 text-xs font-medium px-[14px] py-[6px] rounded-full mb-6 shadow-sm">
-              <span className="w-[7px] h-[7px] rounded-full bg-green flex-shrink-0 [animation:pulse_2.5s_ease-in-out_infinite] [box-shadow:0_0_0_2px_rgba(34,197,94,0.2)]" />
+              <span className="w-[7px] h-[7px] rounded-full bg-accent flex-shrink-0 [animation:pulse_2.5s_ease-in-out_infinite] [box-shadow:0_0_0_2px_rgba(34,197,94,0.2)]" />
               Open to opportunities
             </div>
             <h1 className="reveal reveal-d1 text-[clamp(40px,5.5vw,64px)] font-extrabold text-navy leading-[1.05] tracking-[-1.5px] mb-[14px]">
