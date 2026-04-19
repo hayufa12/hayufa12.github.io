@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useReveal } from '../hooks/useReveal'
 import { useProjects } from '../hooks/useProjects'
 import { useAuth } from '../context/AuthContext'
@@ -84,6 +84,20 @@ export default function Projects() {
   const { user } = useAuth()
   const [requests, setRequests] = useState({})
   const [requestError, setRequestError] = useState(null)
+
+  useEffect(() => {
+    if (!user) return
+    supabase
+      .from('access_requests')
+      .select('*')
+      .eq('user_id', user.id)
+      .then(({ data }) => {
+        if (!data) return
+        const map = {}
+        data.forEach(r => { map[r.project_id] = r })
+        setRequests(map)
+      })
+  }, [user])
 
   async function handleRequestAccess(projectId) {
     if (!user) return
