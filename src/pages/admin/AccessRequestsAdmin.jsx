@@ -11,8 +11,8 @@ function RequestRow({ req, onApprove, onReject, updating }) {
   return (
     <div className="border border-border rounded-xl p-5 bg-white flex items-center gap-4">
       <div className="flex-1">
-        <div className="text-[13px] font-bold text-navy mb-[2px]">{req.projects?.title ?? 'Unknown project'}</div>
-        <div className="text-[11px] text-text3">User: {req.user_id}</div>
+        <div className="text-[13px] font-bold text-navy mb-[2px]">{req.project_title ?? 'Unknown project'}</div>
+        <div className="text-[11px] text-text3">{req.user_email ?? req.user_id}</div>
         <div className="text-[11px] text-text3">
           Requested: {new Date(req.requested_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
         </div>
@@ -48,15 +48,7 @@ export default function AccessRequestsAdmin() {
   }, [])
 
   async function fetchRequests() {
-    const { data } = await supabase
-      .from('access_requests')
-      .select(`
-        id, status, requested_at, reviewed_at,
-        project_id, user_id,
-        projects ( title )
-      `)
-      .order('requested_at', { ascending: false })
-
+    const { data } = await supabase.rpc('get_access_requests_admin')
     setRequests(data ?? [])
     setLoading(false)
   }

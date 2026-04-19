@@ -82,6 +82,37 @@ AS $$
   )
 $$;
 
+CREATE OR REPLACE FUNCTION get_access_requests_admin()
+RETURNS TABLE (
+  id uuid,
+  status text,
+  requested_at timestamptz,
+  reviewed_at timestamptz,
+  project_id uuid,
+  user_id uuid,
+  user_email text,
+  project_title text
+)
+LANGUAGE sql
+SECURITY DEFINER
+STABLE
+AS $$
+  SELECT
+    ar.id,
+    ar.status,
+    ar.requested_at,
+    ar.reviewed_at,
+    ar.project_id,
+    ar.user_id,
+    au.email AS user_email,
+    p.title  AS project_title
+  FROM access_requests ar
+  JOIN auth.users au ON ar.user_id = au.id
+  JOIN projects p    ON ar.project_id = p.id
+  WHERE is_admin()
+  ORDER BY ar.requested_at DESC
+$$;
+
 -- ============================================================
 -- ROW LEVEL SECURITY
 -- ============================================================
