@@ -34,7 +34,7 @@ export default function AdminLayout() {
           {nav.map(item => (
             <NavLink
               key={item.path}
-              to={item.path}
+              to={`/admin/${item.path}`}
               className={({ isActive }) =>
                 `block px-5 py-[10px] text-[13px] font-medium transition-colors duration-150 ${
                   isActive ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5'
