@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import DOMPurify from 'dompurify'
 import { useReveal } from '../hooks/useReveal'
 import { useExperience } from '../hooks/useExperience'
 
@@ -32,7 +33,7 @@ export default function Experience() {
                   {job.description.map((bullet, i) => (
                     <li key={i} className="flex gap-3 text-[13.5px] text-text2 leading-[1.7]">
                       <span className="mt-[7px] w-[5px] h-[5px] rounded-full bg-navy/25 flex-shrink-0" />
-                      <span dangerouslySetInnerHTML={{ __html: bullet }} />
+                      <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(bullet) }} />
                     </li>
                   ))}
                 </ul>
