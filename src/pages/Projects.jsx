@@ -83,14 +83,21 @@ export default function Projects() {
   useReveal(ref, false, [projects])
   const { user } = useAuth()
   const [requests, setRequests] = useState({})
+  const [requestError, setRequestError] = useState(null)
 
   async function handleRequestAccess(projectId) {
     if (!user) return
-    const { data } = await supabase
+    setRequestError(null)
+    const { data, error } = await supabase
       .from('access_requests')
       .insert({ user_id: user.id, project_id: projectId })
       .select()
       .single()
+    if (error) {
+      setRequestError(error.message)
+      console.error('Access request failed:', error)
+      return
+    }
     if (data) {
       setRequests(prev => ({ ...prev, [projectId]: data }))
     }
@@ -101,6 +108,9 @@ export default function Projects() {
       <div className="max-w-[1100px] mx-auto">
         <div className="reveal inline-block bg-navy text-white/70 text-[10px] font-bold tracking-[0.15em] uppercase px-[10px] py-1 rounded mb-[14px]">Projects</div>
         <h1 className="reveal reveal-d1 text-[clamp(24px,3vw,32px)] font-extrabold text-navy tracking-tight leading-snug mb-10">Work & Tools</h1>
+        {requestError && (
+          <p className="text-[13px] text-red-500 mb-4">{requestError}</p>
+        )}
         {loading ? null : projects.length === 0 ? (
           <div className="max-w-[500px] mx-auto text-center bg-white border border-border rounded-2xl p-12 shadow-sm">
             <p className="text-[14px] text-text3 leading-[1.7]">

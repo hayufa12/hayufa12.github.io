@@ -63,10 +63,16 @@ export default function AccessRequestsAdmin() {
 
   async function updateStatus(id, status) {
     setUpdating(id)
-    await supabase
+    const { error } = await supabase
       .from('access_requests')
       .update({ status, reviewed_at: new Date().toISOString() })
       .eq('id', id)
+    if (error) {
+      console.error('Failed to update request:', error)
+      alert(`Error: ${error.message}`)
+      setUpdating(null)
+      return
+    }
     setRequests(prev =>
       prev.map(r => r.id === id ? { ...r, status, reviewed_at: new Date().toISOString() } : r)
     )
