@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useActiveSection } from '../hooks/useActiveSection'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
@@ -64,12 +65,12 @@ export default function Navbar() {
               {user.email}
             </span>
             {isAdmin && (
-              <a
-                href="/admin"
+              <Link
+                to="/admin"
                 className="text-[12px] font-semibold text-navy hover:underline"
               >
                 Dashboard
-              </a>
+              </Link>
             )}
             <button
               onClick={handleSignOut}
@@ -79,12 +80,12 @@ export default function Navbar() {
             </button>
           </>
         ) : (
-          <a
-            href="/login"
+          <Link
+            to="/login"
             className="text-[13px] font-medium text-text3 hover:text-navy transition-colors"
           >
             Sign in
-          </a>
+          </Link>
         )}
         <button
           onClick={() => scrollTo('contact')}

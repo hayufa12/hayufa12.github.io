@@ -1,0 +1,96 @@
+<h2>Single-Page Scroll — Design</h2>
+<p class="subtitle">Here's the full picture of what changes. Scroll down to review each section.</p>
+
+<!-- SECTION 1: App structure -->
+<div class="section">
+  <div class="label">1 · Page structure</div>
+  <h3>App.jsx becomes a flat vertical stack</h3>
+  <p>React Router is removed entirely. All sections render one after another. The Navbar stays sticky at the top.</p>
+
+  <div class="split">
+    <div class="mockup">
+      <div class="mockup-header">Before (multi-page)</div>
+      <div class="mockup-body" style="font-size:12px;line-height:2.2">
+        <div style="color:#718096">&lt;BrowserRouter&gt;</div>
+        <div style="padding-left:16px;color:#718096">&lt;Navbar /&gt;</div>
+        <div style="padding-left:16px;color:#718096">&lt;Routes&gt;</div>
+        <div style="padding-left:32px;color:#718096">&lt;Route path="/" → Home /&gt;</div>
+        <div style="padding-left:32px;color:#718096">&lt;Route path="/about" → About /&gt;</div>
+        <div style="padding-left:32px;color:#718096">&lt;Route path="/experience" → … /&gt;</div>
+        <div style="padding-left:32px;color:#718096">…</div>
+        <div style="padding-left:16px;color:#718096">&lt;/Routes&gt;</div>
+        <div style="padding-left:16px;color:#718096">&lt;Footer /&gt;</div>
+        <div style="color:#718096">&lt;/BrowserRouter&gt;</div>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-header">After (single-page)</div>
+      <div class="mockup-body" style="font-size:12px;line-height:2.2">
+        <div style="color:#1a1a2e;font-weight:600">&lt;Navbar /&gt;</div>
+        <div style="color:#1a1a2e;font-weight:600">&lt;main&gt;</div>
+        <div style="padding-left:16px;color:#1a1a2e">&lt;Hero /&gt; <span style="color:#718096;font-size:10px">(from Home.jsx)</span></div>
+        <div style="padding-left:16px;color:#1a1a2e">&lt;KeyNumbers /&gt; <span style="color:#718096;font-size:10px">(from Home.jsx)</span></div>
+        <div style="padding-left:16px;color:#1a1a2e">&lt;About id="about" /&gt;</div>
+        <div style="padding-left:16px;color:#1a1a2e">&lt;Experience id="experience" /&gt;</div>
+        <div style="padding-left:16px;color:#1a1a2e">&lt;Skills id="skills" /&gt;</div>
+        <div style="padding-left:16px;color:#1a1a2e">&lt;Projects id="projects" /&gt;</div>
+        <div style="padding-left:16px;color:#1a1a2e">&lt;Contact id="contact" /&gt;</div>
+        <div style="color:#1a1a2e;font-weight:600">&lt;/main&gt;</div>
+        <div style="color:#1a1a2e;font-weight:600">&lt;Footer /&gt;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: Navbar -->
+<div class="section">
+  <div class="label">2 · Navbar</div>
+  <h3>NavLink → button with scroll + active via IntersectionObserver</h3>
+  <p>A new <code>useActiveSection</code> hook observes all section IDs and returns whichever is currently in view. The navbar uses this to highlight the active link — same visual result as before, no React Router.</p>
+
+  <div class="mockup">
+    <div class="mockup-header">Navbar state as user scrolls to Experience</div>
+    <div class="mockup-body">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e2e5f0">
+        <span style="font-weight:800;color:#1a1a2e;font-size:15px">HF</span>
+        <div style="display:flex;gap:24px;font-size:13px">
+          <span style="color:#718096">About</span>
+          <span style="font-weight:700;color:#1a1a2e;border-bottom:2px solid #1a1a2e;padding-bottom:2px">Experience</span>
+          <span style="color:#718096">Skills</span>
+          <span style="color:#718096">Projects</span>
+          <span style="color:#718096">Contact</span>
+        </div>
+        <span style="background:#1a1a2e;color:white;font-size:12px;font-weight:600;padding:7px 16px;border-radius:8px">Get in Touch</span>
+      </div>
+      <div style="font-size:11px;color:#718096;margin-top:8px">↑ "Experience" is bold because that section is in view — tracked by IntersectionObserver</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: Files that change -->
+<div class="section">
+  <div class="label">3 · Files changed</div>
+  <h3>Minimal surface area — 9 files touched</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead>
+      <tr style="border-bottom:1px solid #e2e5f0">
+        <th style="text-align:left;padding:6px 8px;color:#718096;font-weight:600">File</th>
+        <th style="text-align:left;padding:6px 8px;color:#718096;font-weight:600">Change</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:6px 8px;font-weight:600;color:#1a1a2e">src/App.jsx</td><td style="padding:6px 8px;color:#4a5568">Remove Router, render flat stack of all sections</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:6px 8px;font-weight:600;color:#1a1a2e">src/components/Navbar.jsx</td><td style="padding:6px 8px;color:#4a5568">Replace NavLink with scroll buttons, add useActiveSection</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:6px 8px;font-weight:600;color:#1a1a2e">src/hooks/useActiveSection.js</td><td style="padding:6px 8px;color:#22c55e">New — IntersectionObserver active section tracker</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:6px 8px;font-weight:600;color:#1a1a2e">src/pages/Home.jsx</td><td style="padding:6px 8px;color:#4a5568">Remove About preview; change "View Experience" to scroll button; split into Hero + KeyNumbers sections</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:6px 8px;font-weight:600;color:#1a1a2e">src/pages/About.jsx</td><td style="padding:6px 8px;color:#4a5568">Add id="about" to root element</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:6px 8px;font-weight:600;color:#1a1a2e">src/pages/Experience.jsx</td><td style="padding:6px 8px;color:#4a5568">Add id="experience" to root element</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:6px 8px;font-weight:600;color:#1a1a2e">src/pages/Skills.jsx</td><td style="padding:6px 8px;color:#4a5568">Add id="skills" to root element</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:6px 8px;font-weight:600;color:#1a1a2e">src/pages/Projects.jsx</td><td style="padding:6px 8px;color:#4a5568">Add id="projects" to root element</td></tr>
+      <tr><td style="padding:6px 8px;font-weight:600;color:#1a1a2e">src/pages/Contact.jsx</td><td style="padding:6px 8px;color:#4a5568">Add id="contact" to root element</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:10px;font-size:12px;color:#718096">react-router-dom can be removed from package.json as a cleanup step.</p>
+</div>
+
+<p class="subtitle" style="margin-top:8px">Does this look right to you?</p>

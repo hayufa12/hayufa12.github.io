@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-vite@latest . --template react --force)",
+      "Bash(cp /tmp/vite-scaffold/myapp/package.json 'E:\\\\Code\\\\Hafizh Landing Page\\\\.worktrees\\\\react-migration/package.json')",
+      "Bash(cp /tmp/vite-scaffold/myapp/vite.config.js 'E:\\\\Code\\\\Hafizh Landing Page\\\\.worktrees\\\\react-migration/vite.config.js')",
+      "Bash(cp /tmp/vite-scaffold/myapp/index.html 'E:\\\\Code\\\\Hafizh Landing Page\\\\.worktrees\\\\react-migration/index.html')",
+      "Bash(cp /tmp/vite-scaffold/myapp/eslint.config.js 'E:\\\\Code\\\\Hafizh Landing Page\\\\.worktrees\\\\react-migration/eslint.config.js')",
+      "Bash(mkdir -p 'E:\\\\Code\\\\Hafizh Landing Page\\\\.worktrees\\\\react-migration/src/assets')",
+      "Bash(npm install:*)",
+      "Bash(timeout 15 npm run dev)",
+      "Bash(npm run:*)",
+      "Bash(git checkout *)",
+      "Bash(npm test *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(cat src/hooks/useProjects.js)",
+      "Bash(cat src/hooks/useProjects.jsx)",
+      "Bash(cat tailwind.config.js)",
+      "Bash(cat tailwind.config.ts)"
+    ]
+  }
+}

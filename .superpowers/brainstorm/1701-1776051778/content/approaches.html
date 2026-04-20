@@ -1,0 +1,55 @@
+<h2>Which implementation approach?</h2>
+<p class="subtitle">All three remove multi-page routing. Differences are in how scroll targeting and active nav state work.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="A" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>A — Section IDs + scrollIntoView <span style="background:#22c55e;color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px">Recommended</span></h3>
+      <p style="margin-bottom:10px">Each section gets an <code>id</code> (e.g. <code>id="experience"</code>). Nav click handlers call <code>document.getElementById('experience').scrollIntoView({behavior:'smooth'})</code>. A custom <code>useActiveSection</code> Intersection Observer hook highlights the current nav item as you scroll.</p>
+      <div class="mockup" style="font-size:12px;padding:0">
+        <div class="mockup-header">Nav behavior</div>
+        <div class="mockup-body" style="padding:10px 14px">
+          <div style="display:flex;gap:16px;align-items:center;font-size:12px;margin-bottom:8px">
+            <span style="font-weight:700;color:#1a1a2e">HF</span>
+            <span style="color:#718096">About</span>
+            <span style="font-weight:700;color:#1a1a2e;border-bottom:2px solid #1a1a2e">Experience</span>
+            <span style="color:#718096">Skills</span>
+            <span style="color:#718096">Projects</span>
+            <span style="color:#718096">Contact</span>
+          </div>
+          <div style="font-size:11px;color:#718096">↑ Active link updates as you scroll — no URL change</div>
+        </div>
+      </div>
+      <div class="pros-cons" style="margin-top:8px">
+        <div class="pros"><h4>Pros</h4><ul><li>Simplest code</li><li>No React Router at all</li><li>No URL pollution</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>None significant</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="B" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>B — React refs via Context</h3>
+      <p style="margin-bottom:10px">Each section exposes a <code>ref</code>. A <code>SectionRefsContext</code> provides refs to the Navbar. Clicks call <code>ref.current.scrollIntoView()</code>. Same Intersection Observer for active state.</p>
+      <div class="pros-cons" style="margin-top:8px">
+        <div class="pros"><h4>Pros</h4><ul><li>More "React" idiomatic</li><li>No direct DOM access</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Extra context boilerplate</li><li>More files to change</li><li>Same end result as A</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="C" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>C — Intercept anchor links</h3>
+      <p style="margin-bottom:10px">Keep <code>&lt;a href="#about"&gt;</code> but call <code>e.preventDefault()</code> + <code>scrollIntoView()</code> to prevent URL hash changes. Keeps anchor semantics but prevents URL update.</p>
+      <div class="pros-cons" style="margin-top:8px">
+        <div class="pros"><h4>Pros</h4><ul><li>Semantic HTML anchors</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Fighting browser defaults</li><li>More fragile</li><li>Worse than A</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px">Recommendation: <strong>A</strong> is the cleanest path. Remove React Router entirely — it's no longer needed.</p>
